@@ -5,7 +5,6 @@ require 'colorize'
 # Provides some useful functionality to the rest of the program
 class MastermindHelper
   def self.show_code(code)
-    puts 'The master code is:'
     print_code = []
     code.each do |element|
       print_code.push(colored_code(element))
@@ -23,10 +22,12 @@ class MastermindHelper
       'G '.colorize(:green)
     when 'P'
       'P '.colorize(:magenta)
+    else
+      element
     end
   end
 
-  def self.get_manual_code
+  def self.manual_code
     code = []
     is_valid_code = false
     until code.length == 4 && is_valid_code
