@@ -17,7 +17,7 @@ class CodeMaker
   end
 
   def show_code
-    MastermindHelper.show_code(@code)
+    MastermindHelper.show_code(@code.join(' '))
   end
 
   # Evaluates the guess, returning a string that shows the evaluation of the guess
@@ -29,13 +29,13 @@ class CodeMaker
     guess.each_with_index do |color, index|
       next unless code_clone.include?(color)
 
-      code_clone.delete_at(code_clone.index(color))
-      w_pegs += 1
       if @code[index] == color
+        code_clone.delete_at(code_clone.index(color))
         r_pegs += 1
-        w_pegs -= 1
       end
     end
+    code_clone.each { |color| w_pegs += 1 if guess.include?(color) }
+
     return 'WIN' if r_pegs == 4
 
     "#{w_pegs} W : #{r_pegs} R"
