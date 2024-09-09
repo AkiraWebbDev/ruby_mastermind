@@ -6,6 +6,7 @@ require 'colorize'
 class MastermindHelper
   def self.show_code(code)
     print_code = []
+    code = code.split(' ')
     code.each do |element|
       print_code.push(colored_code(element))
     end
@@ -23,7 +24,7 @@ class MastermindHelper
     when 'P'
       'P '.colorize(:magenta)
     when 'R'
-      'R'.colorize(:red)
+      'R '.colorize(:red)
     else
       element
     end
