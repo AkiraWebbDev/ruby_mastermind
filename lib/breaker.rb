@@ -4,8 +4,6 @@ require_relative 'helper'
 
 # Class that represents the player breaking the code
 class CodeBreaker
-  attr_accessor :past_guesses
-
   def initialize
     @past_guesses = []
   end
@@ -16,6 +14,12 @@ class CodeBreaker
   end
 
   def display_past_guesses
+    puts "\n\nPast guesses:\n"
     @past_guesses.each { |guess| MastermindHelper.show_code(guess) }
+    puts "\n"
+  end
+
+  def add_guess_result(evaluated_guess)
+    @past_guesses.push(evaluated_guess)
   end
 end
