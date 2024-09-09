@@ -16,13 +16,23 @@ class GameLoop
     until options.include?(choice)
       puts "\nEnter \"1\" to: Solve a random code.
       \nEnter \"2\" to: Solve a manually entered code.
-      \n\nType \"QUIT\" at any time to end the game."
+      \n\nType \"QUIT\" at any time to end the game.\n"
       choice = gets.chomp
     end
     return if choice == 'QUIT'
 
     create_maker(choice)
+    choose_rounds
     main_game_loop
+  end
+
+  def choose_rounds
+    guess_rounds = -1
+    until guess_rounds.positive?
+      puts "Choose the number of round:\n"
+      guess_rounds = gets.chomp.to_i
+    end
+    @rounds = guess_rounds
   end
 
   def create_maker(choice)
@@ -31,11 +41,13 @@ class GameLoop
       @maker = CodeMaker.new(true)
     when '2'
       @maker = CodeMaker.new(false)
+      puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHidden your secret code..."
     end
   end
 
   def main_game_loop
     win = false
+    @round_number = 0
     until win
       choice = game_options
       case choice
@@ -49,7 +61,9 @@ class GameLoop
         output = "#{choice} - #{evaluation}"
         @breaker.add_guess_result(output)
         MastermindHelper.show_code(output)
+        @round_number += 1
       end
+      break if @round_number == @rounds
     end
     if win
       win_game
@@ -59,9 +73,8 @@ class GameLoop
   end
 
   def game_options
-    puts "Type your next guess!\nOr"
-    puts '"1": Display past guesses.'
-    puts '"QUIT": End the game.'
+    puts "Round #{@round_number}/#{@rounds}\nType your next guess!\nChoose from:"
+    puts "#{MastermindHelper.show_code('R O G B P')}\n\nOR\n1: Display past guesses.\nQUIT: End the game."
     gets.chomp
   end
 
