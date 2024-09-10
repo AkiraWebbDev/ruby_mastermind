@@ -25,16 +25,21 @@ class CodeMaker
     w_pegs = 0
     r_pegs = 0
     guess = guess.split
+    guess_clone = guess.clone
     code_clone = @code.clone
     guess.each_with_index do |color, index|
+      next unless code_clone.include?(color) && @code[index] == color
+
+      guess_clone.delete_at(index)
+      code_clone[index] = 'X'
+      r_pegs += 1
+    end
+    guess_clone.each do |color|
       next unless code_clone.include?(color)
 
-      if @code[index] == color
-        code_clone.delete_at(code_clone.index(color))
-        r_pegs += 1
-      end
+      code_clone.delete_at(code_clone.index(color))
+      w_pegs += 1
     end
-    code_clone.each { |color| w_pegs += 1 if guess.include?(color) }
 
     return 'WIN' if r_pegs == 4
 

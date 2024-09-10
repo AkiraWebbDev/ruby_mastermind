@@ -73,8 +73,9 @@ class GameLoop
   end
 
   def game_options
-    puts "Round #{@round_number}/#{@rounds}\nType your next guess!\nChoose from:"
-    puts "#{MastermindHelper.show_code('R O G B P')}\n\nOR\n1: Display past guesses.\nQUIT: End the game."
+    @breaker.display_past_guesses
+    puts "\nRound #{@round_number}/#{@rounds}\nType your next guess!\nChoose from:"
+    puts "#{MastermindHelper.show_code('R O G B P')}\nOR\n1: Display past guesses.\nQUIT: End the game."
     gets.chomp
   end
 
