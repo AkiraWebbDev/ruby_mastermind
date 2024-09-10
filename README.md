@@ -1,7 +1,7 @@
 # Mastermind
 A CLI based version of the classic 1970 board game Mastermind. Written in Ruby. 
 
-Learn more about Mastermine [here](https://en.wikipedia.org/wiki/Mastermind_(board_game))
+Learn more about Mastermind [here](https://en.wikipedia.org/wiki/Mastermind_(board_game))
 ___
 ## How to play
 Guess the sequence of colors in as few guesses as possible.
